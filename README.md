@@ -12,4 +12,4 @@ Device configuration for Motorola SM6150 Devices
 | Moto one fusion+ | liber | 10 |
 | Moto G9 plus | odessa | 10 |
 | Moto G stylus (2021) | minsk | 10 |
-| Moto G60 | hanoip | 11 |
+| Moto G40 / G60 | hanoip | 11 |
