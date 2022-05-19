@@ -18,7 +18,8 @@
 AB_OTA_PARTITIONS += \
     product \
     system_ext \
-    vbmeta_system
+    vbmeta_system \
+    vendor_boot
 
 # Crypto
 PRODUCT_PROPERTY_OVERRIDES += \
