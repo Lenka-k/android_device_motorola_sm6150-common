@@ -118,7 +118,7 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.effect@6.0-impl \
     android.hardware.audio.service \
     android.hardware.soundtrigger@2.2-impl \
-    android.hardware.bluetooth.audio@2.0-impl \
+    android.hardware.bluetooth.audio@2.1-impl \
     audio.a2dp.default \
     audio.bluetooth.default \
     audio.primary.sm6150 \
@@ -150,9 +150,9 @@ PRODUCT_COPY_FILES += \
 
 # Boot control
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.0-impl:64 \
-    android.hardware.boot@1.0-service \
-    android.hardware.boot@1.0-impl.recovery \
+    android.hardware.boot@1.1-impl-qti \
+    android.hardware.boot@1.1-impl-qti.recovery \
+    android.hardware.boot@1.1-service \
     bootctrl.qcom \
     bootctrl.qcom.recovery
 
@@ -163,7 +163,8 @@ PRODUCT_PACKAGES_DEBUG += \
 PRODUCT_PACKAGES += \
     liba2dpoffload \
     com.dsi.ant@1.0.vendor \
-    vendor.qti.hardware.bluetooth_audio@2.0.vendor \
+    android.hardware.bluetooth@1.0.vendor \
+    vendor.qti.hardware.bluetooth_audio@2.1.vendor \
     vendor.qti.hardware.btconfigstore@1.0.vendor \
     vendor.qti.hardware.btconfigstore@2.0.vendor
 
@@ -245,10 +246,6 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.mapper@2.0.vendor \
     vendor.qti.hardware.display.mapper@3.0.vendor \
     vendor.qti.hardware.display.mapper@4.0.vendor
-
-# DRM
-PRODUCT_PACKAGES += \
-    android.hardware.drm@1.3-service.clearkey
 
 # FM
 PRODUCT_PACKAGES += \
@@ -420,6 +417,8 @@ PRODUCT_PACKAGES += \
     libjson \
     libqti_vndfwk_detect \
     libqti_vndfwk_detect.vendor
+    libvndfwk_detect_jni.qti \
+    libvndfwk_detect_jni.qti.vendor
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.va_aosp.support=1
@@ -429,9 +428,10 @@ PRODUCT_ODM_PROPERTIES += \
 
 # RIL
 PRODUCT_PACKAGES += \
-    android.hardware.radio@1.2 \
-    android.hardware.radio.config@1.0 \
-    android.hardware.secure_element@1.0 \
+    android.hardware.radio@1.5.vendor \
+    android.hardware.radio.config@1.2.vendor \
+    android.hardware.radio.deprecated@1.0.vendor \
+    android.hardware.secure_element@1.2.vendor \
     libprotobuf-cpp-full \
     librmnetctl \
     libxml2
@@ -441,8 +441,8 @@ PRODUCT_PACKAGES += \
     libstdc++.vendor
 
 # Vibrator
-PRODUCT_PACKAGES += \
-    vendor.qti.hardware.vibrator.service
+# PRODUCT_PACKAGES += \
+#    vendor.qti.hardware.vibrator.service
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
@@ -480,8 +480,8 @@ PRODUCT_PACKAGES += \
     android.hardware.thermal@2.0-service.qti
 
 # Trust HAL
-PRODUCT_PACKAGES += \
-    vendor.lineage.trust@1.0-service
+# PRODUCT_PACKAGES += \
+#    vendor.lineage.trust@1.0-service
 
 # Update engine
 PRODUCT_PACKAGES += \
@@ -494,7 +494,11 @@ PRODUCT_PACKAGES_DEBUG += \
 
 # USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service
+    android.hardware.usb@1.3-service-qti \
+    init.qcom.usb.rc \
+    init.qcom.usb.sh
+
+PRODUCT_SOONG_NAMESPACES += vendor/qcom/opensource/usb/etc
 
 # VNDK
 PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := strict
@@ -504,6 +508,7 @@ PRODUCT_PRODUCT_VNDK_VERSION := current
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
     hostapd \
+    libqsap_sdk \
     libwpa_client \
     libwifi-hal-ctrl \
     libwifi-hal-qcom \
@@ -518,9 +523,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
-    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini
+    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg_qca6390.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/qca6390/WCNSS_qcom_cfg.ini
 
 # WiFi Display
 PRODUCT_PACKAGES += \
     libnl \
     libwfdaac_vendor
+
+PRODUCT_BOOT_JARS += \
+    WfdCommon 
